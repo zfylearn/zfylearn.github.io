@@ -326,21 +326,36 @@
   
 
   
-  <div id="gitment-ctn"></div>
-<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
-  <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
-  <script>
-    var gitment = new Gitment({
-    id: "https://zfylearn.github.io",
-    owner: 'zfylearn',
-    repo: 'https://zfylearn.github.io',
-    oauth: {
-    client_id: '2c3a764f4cf0ed50c7f5',
-    client_secret: 'ba35f07b8731bd17128e37ce86734ab0869344a1',
-    },
-    })
-    gitment.render('gitment-ctn')
-  </script>
+  
+  <div id="container"></div>
+
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+    <script>
+
+      var gitment = new Gitment({
+
+      id: 'page.date', // 可选。默认为 location.href
+
+      owner: 'zfylearn',
+
+      repo: 'zfylearn.github.io',
+
+      oauth: {
+
+      client_id: '2c3a764f4cf0ed50c7f5',
+
+      client_secret: 'ba35f07b8731bd17128e37ce86734ab0869344at',
+
+      },
+
+      })
+
+      gitment.render('container')
+
+    </script>
   
 
 
