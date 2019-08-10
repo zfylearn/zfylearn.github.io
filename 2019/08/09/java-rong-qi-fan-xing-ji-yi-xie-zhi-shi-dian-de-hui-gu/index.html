@@ -5,7 +5,20 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="java容器、泛型及一些知识点的回顾, Boy&#39;s Blog">
-    <meta name="description" content="java容器、泛型及一些知识点的回顾 | Boy&#39;s Blog">
+    <meta name="description" content="
+
+记录一些自己在学习中认识不够清晰的知识点，方便自己回顾
+
+
+一、 集合的知识结构图
+
+什么时候使用集合？
+ 当我们需要将一些相同结构的个体整合在一起时，就可以考虑使用集合了 。举例：购物车
+
+
+
+为什么要使用集合？
+  集合和数组相似点">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -372,9 +385,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="../../../../tags/学习笔记/" target="_blank">
+                                <span class="chip bg-color">学习笔记</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -392,14 +409,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        1.5k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        6 分
                     </div>
                     
                 
@@ -415,7 +432,254 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <hr>
+<ul>
+<li>记录一些自己在学习中认识不够清晰的知识点，方便自己回顾</li>
+</ul>
+<hr>
+<p>一、 集合的知识结构图<br><img src="https://s2.ax1x.com/2019/08/10/eLk77D.png" alt></p>
+<ol>
+<li><p>什么时候使用集合？</p>
+<p> 当我们需要将一些相同结构的个体整合在一起时，就可以考虑使用集合了 。举例：购物车</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>为什么要使用集合？</p>
+<p>  集合和数组相似点：<br>  都可以存储多个对象，对外作为一个整体存在，是“装其他对象的对象”.</p>
+</li>
+</ol>
+<pre><code> 数组：优点：线性序列效率高  缺点：长度需要初始化，且固定不变，不灵活。删除和添加效率低下；缺乏封装，操作繁琐。
+
+  因为数组的这些缺点，因此引入集合
+</code></pre><p>简单概念解释</p>
+<p>• Collection   根接口，表示一组对象</p>
+<p>• List 有顺序可重复 </p>
+<pre><code>  ArrayList： 查询效率高，增删效率低，长度不受限实现（扩容）
+  Linkedlist: 增删效率高，查询效率低
+</code></pre><p>• Set  没有顺序不可重复</p>
+<pre><code> • HashSet 
+ • 采用Hashtable哈希表存储结构（神奇的结构） 
+ • 优点：添加速度快 查询速度快 删除速度快 
+ • 缺点：无序 
+
+ • LinkedHashSet 
+ • 采用哈希表存储结构，同时使用链表维护次序
+ • 有序（添加顺序）
+
+ • TreeSet
+ • 采用二叉树（红黑树）的存储结构 
+ • 优点：有序 查询速度比List快（按照内容查询） 
+ • 缺点：查询速度没有HashSet快
+</code></pre><p>• Map  存储一组键值对象，key和value</p>
+<pre><code>HashMap：底层数据结构：数组加链表，键不能重复，如果重复则新的覆盖旧的
+
+TreeMap：排序时使用
+
+• Key 唯一 无序
+• value 不唯一 无序
+</code></pre><hr>
+<p>二、泛型（转自csdn 作者 我不是大王强）</p>
+<p>//  泛型：就是一种不确定的数据类型。</p>
+<p>// 比如：ArrayList<e> E就是泛型。 这种不确定的数据类型需要在使用这个类的时候才能够确定出来。</e></p>
+<p>// 泛型可以省略，如果省略，默认泛型是Object类型。</p>
+<p>// 泛型的好处：</p>
+<ul>
+<li><ol>
+<li>省略了强转的代码。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>可以把运行时的问题提前到编译时期。</li>
+</ol>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo01Generic</span> <span class="token punctuation">{</span>
+
+     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">//创建集合不给出泛型</span>
+    ArrayList list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"java"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//遍历集合</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>Object obj <span class="token operator">:</span> list<span class="token punctuation">)</span> System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//进行遍历，打印出每个字符串长度</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>Object obj <span class="token operator">:</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        String str <span class="token operator">=</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> obj<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*此处练习了向下转型*/</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//创建集合给出泛型</span>
+    ArrayList<span class="token operator">&lt;</span>String<span class="token operator">></span> list2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//添加元素</span>
+    list2<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"helloo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    list2<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"helo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    list2<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token comment" spellcheck="true">//list2.add(100);编译的时候就会报错，如果没有给出泛型，则不会报错</span>
+    <span class="token comment" spellcheck="true">//使用增强for遍历集合</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>String str2 <span class="token operator">:</span> list2
+            <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</li>
+</ul>
+<hr>
+<p>三、构造器（一种特殊的方法）</p>
+<p>// 用于对象的初始化</p>
+<p>// 需要注意</p>
+<ul>
+<li>构造器的方法名必须和类名一致！</li>
+<li>构造器虽然有返回值，但是不能定义返回类型(返回值的类型肯定是本类)，不能在构造器里调用 return。</li>
+<li>通过new关键字调用！！ </li>
+<li>如果我们没有定义构造器，则系统会自动定义一个无参的构造方法。如果已定义则编译器不会 添加无参数构造方法！</li>
+<li>与普通方法一样，构造方法也可以重载</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Point</span><span class="token punctuation">{</span>
+    <span class="token keyword">double</span> x<span class="token punctuation">,</span>y<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//构造方法名称必须和类名保持一致</span>
+    <span class="token keyword">public</span> <span class="token function">Point</span><span class="token punctuation">(</span><span class="token keyword">double</span> _x<span class="token punctuation">,</span><span class="token keyword">double</span> _y<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        x<span class="token operator">=</span>_x<span class="token punctuation">;</span>
+        y<span class="token operator">=</span>_y<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getDistance</span><span class="token punctuation">(</span>Point p<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">sqrt</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">-</span>p<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>x<span class="token operator">-</span>p<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token operator">+</span><span class="token punctuation">(</span>y<span class="token operator">-</span>p<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>y<span class="token operator">-</span>p<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Constructor</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Point p<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Point</span><span class="token punctuation">(</span><span class="token number">3.0</span><span class="token punctuation">,</span><span class="token number">4.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//new关键字调用</span>
+        Point origin<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Point</span><span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">,</span><span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span><span class="token function">getDistance</span><span class="token punctuation">(</span>origin<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<p>四、Static关键字</p>
+<ul>
+<li><p>修饰成员变量和方法，从属于类</p>
+</li>
+<li><p>普通变量和方法从属于对象</p>
+</li>
+<li><p>静态方法不能使用非静态方法</p>
+</li>
+<li><p>非静态方法可以使用静态</p>
+</li>
+</ul>
+<pre class=" language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestStatic</span>
+  <span class="token punctuation">{</span> 
+  <span class="token keyword">int</span> a<span class="token punctuation">;</span> 
+
+  <span class="token keyword">static</span> <span class="token keyword">int</span> width<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//修饰成员变量，从属于类</span>
+
+  <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">gg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>   <span class="token comment" spellcheck="true">//修饰方法</span>
+
+     <span class="token comment" spellcheck="true">//tt();  //报错静态方法不能使用非静态方法</span>
+
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"gg"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token keyword">void</span> <span class="token function">tt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>     <span class="token comment" spellcheck="true">//从属于对象</span>
+       <span class="token function">gg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 可以使用静态方法</span>
+       System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"tt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+
+   <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+          TestStatic hi <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TestStatic</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+          TestStatic<span class="token punctuation">.</span>width <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+
+           <span class="token comment" spellcheck="true">//  TestStatic.gg(); //gg(); </span>
+
+           <span class="token comment" spellcheck="true">//   hi.gg(); //通过引用也可以访问static变量或static方法。不过，一般还 是使用类名.static成员名来访问。 </span>
+           <span class="token comment" spellcheck="true">//  gg();</span>
+
+           hi<span class="token punctuation">.</span><span class="token function">tt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//用对象引用，因为从属于对象</span>
+      <span class="token punctuation">}</span> 
+    <span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<p>五、this关键字</p>
+<ul>
+<li>本质：创建好对象的地址</li>
+</ul>
+<p>this的作用: </p>
+<pre><code>• this表示的是当前对象本身， 
+• 更准确地说，this代表当前对象的一个引用。
+</code></pre><p>普通方法中使用this</p>
+<pre><code>• 区分类成员属性和方法的形参. 
+• 调用当前对象的其他方法（可以省略） 
+• 位置：任意 
+</code></pre><p>构造方法中使用this</p>
+<pre><code>• 使用this来调用其它构造方法 
+• 位置：必须是第一条语句
+• this不能用于static方法。（底层在堆里的对象中，而静态方法在方法区）
+</code></pre><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TeatThis</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">int</span> a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>c<span class="token punctuation">;</span>
+
+    <span class="token function">TeatThis</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span><span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token operator">=</span>a<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//区分类成员属性和方法的形参</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>b<span class="token operator">=</span>b<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">TeatThis</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span><span class="token keyword">int</span> b<span class="token punctuation">,</span><span class="token keyword">int</span> c<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//调用其它构造方法 ,必须是第一条语句</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>c<span class="token operator">=</span>c<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token keyword">void</span> <span class="token function">sing</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">sing</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//调用本类中的sing()即调用当前对象的其他方法</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"你妈妈喊你回家吃饭"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+        TeatThis hi<span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TeatThis</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        hi<span class="token punctuation">.</span><span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p>再次强调</p>
+<pre><code>• This代表当前对象自身的引用（必须new） 
+• This可以修饰属性，区别成员变量和局部变量 
+• This修饰方法 
+• This修饰构造方法（必须是第一条语句）
+</code></pre><hr>
+<p>六、知识点的小问题记录</p>
+<ul>
+<li>Object类是所有Java类的根基类 </li>
+<li><p>如果在类的声明中未使用extends关键字指明其基类，则默认基类为Object类</p>
+<pre><code> public class Person { ... } 
+ public class Person extends Object { ... }
+</code></pre></li>
+<li><p>B b = new B(); // 则既声明了类型为B的引用，又创建了B的实例（对象），并且将b引用了B的实例（对象）。</p>
+</li>
+<li><p>创建对象的步骤</p>
+<pre><code>• 分配对象空间，并将对象的成员变量初始化为0或空
+• 执行属性值的显式初始化
+• 执行构造方法
+• 返回对象的地址给相关变量
+</code></pre></li>
+</ul>
+<hr>
+<p>END</p>
+
             </div>
             <hr>
 
@@ -651,6 +915,19 @@
                     <div class="summary block-with-text">
                         
                             
+
+记录一些自己在学习中认识不够清晰的知识点，方便自己回顾
+
+
+一、 集合的知识结构图
+
+什么时候使用集合？
+ 当我们需要将一些相同结构的个体整合在一起时，就可以考虑使用集合了 。举例：购物车
+
+
+
+为什么要使用集合？
+  集合和数组相似点
                         
                     </div>
                     <div class="publish-info">
@@ -666,6 +943,14 @@
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="../../../../tags/学习笔记/" target="_blank">
+                        <span class="chip bg-color">学习笔记</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -869,7 +1154,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">2k</span>
+                <span class="white-color">3.6k</span>
             
 
             
