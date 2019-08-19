@@ -4,12 +4,21 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="启发性的飞机小游戏（一）, Boy&#39;s Blog">
+    <meta name="keywords" content="如何使用API, Boy&#39;s Blog">
     <meta name="description" content="
-写在前面   建议先将结尾源码素材下载，供练习中的对照参考，如果遇到问题，私下补课，也可以联系博主，第一次写有点多的东西，不合理的地方可以评论留言。
+     初学到的对api的使用，总结一下，加深记忆，我认为主要可从功能作用、继承体系、构造器、方法、四个方面来了解。
+
+一、功能作用
+看这里直接上图
 
 
-游戏项目的介绍基于Eclipse的开发环境，通过AWT图形用户界面技术（现在用的少）">
+二、继承体系
+
+三、构造器
+分为两种情况 显示有构造器和没有构造器
+
+有构造器
+调">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +26,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>启发性的飞机小游戏（一） | Boy&#39;s Blog</title>
+    <title>如何使用API | Boy&#39;s Blog</title>
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="medias/favicon.ico">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -268,7 +277,7 @@
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        启发性的飞机小游戏（一）
+                        如何使用API
                     </div>
                 </div>
             </div>
@@ -394,21 +403,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-22
+                    2019-08-19
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.8k
+                        130
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        8 分
+                        1 分
                     </div>
                     
                 
@@ -425,488 +434,35 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <hr>
-<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>   建议先将结尾源码素材下载，供练习中的对照参考，如果遇到问题，私下补课，也可以联系博主，第一次写有点多的东西，不合理的地方可以评论留言。</p>
-<hr>
-<hr>
-<h3 id="游戏项目的介绍"><a href="#游戏项目的介绍" class="headerlink" title="游戏项目的介绍"></a>游戏项目的介绍</h3><p>基于Eclipse的开发环境，通过AWT图形用户界面技术（现在用的少）建立java项目，目的实现：键盘操控飞机移动、炮弹任意角度飞行、碰撞爆炸效果和游戏时间计时。</p>
-<hr>
-<h4 id="一、初始化窗口"><a href="#一、初始化窗口" class="headerlink" title="一、初始化窗口"></a>一、初始化窗口</h4><ol>
-<li>首先需要的是建立一个窗口，将背景和飞机两张图片显示出来（这里我们需要创建一个图片包和引入图片的工具类）。</li>
-</ol>
-<p>代码如下：</p>
-<pre><code> package game;
-
- import java.awt.Color;
- import java.awt.Frame;
- import java.awt.Graphics;
- import java.awt.Image;
-
- public class planegame extends Frame {
-
- Image planeImg =GameUtil.getImage(&quot;Image/plane.png&quot;);
- Image bg =GameUtil.getImage(&quot;Image/bg.jpg&quot;);
-
- @Override
- public void paint(Graphics g) {// 自动被调用. g相当一支画笔
-
-    g.drawImage(bg, 0,0,null);
-    g.drawImage(planeImg,250,250,null);
-    }
-
-
- /**
- * 初始化窗口
- */
- public void launchFrame() {
-    this.setTitle(&quot;天才爱生活作品&quot;);
-    this.setVisible(true);
-    this.setSize(Constant.GAME_WIDTH,Constant.GAME_HEIGHT);
-    this.setLocation(200, 200);
-
-    }
-
- public static void main(String[] args) {
-    planegame f = new planegame();
-    f.launchFrame();
- }
- }
-</code></pre><ol start="2">
-<li>我们还需要在game包下再创建一个类，GameUtil（名字变了相应的代码则需要改变）工具类来实现图片的加载，上面 我们有引用到.</li>
-</ol>
-<p>代码如下：</p>
-<pre><code> package game;
-
- import java.awt.Image;
-
- import java.awt.image.BufferedImage;
-
- import java.io.IOException;
-
- import java.net.URL;
-
- import javax.imageio.ImageIO;
-
- public class GameUtil {
- // 工具类最好将构造器私有化
- private GameUtil() {
- } 
-
-
- /**
- * 
- * 返回指定路径文件的图片对象
- * @param path
- * @return
- */
- public static Image getImage(String path) {
-    BufferedImage bi = null;
-    try {
-        URL u = GameUtil.class.getClassLoader().getResource(path);
-        bi = ImageIO.read(u);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    return bi;
-   }
- }
-</code></pre><ol start="3">
-<li><p>同2创建Constant类，方便后续的调用</p>
-<pre><code> public class Constant {
-   public static final int GAME_WIDTH=500;
-   public static final int GAME_HEIGHT=500;
- }
-</code></pre></li>
-<li><p>效果如下</p>
-<p><img src="https://s2.ax1x.com/2019/07/23/eFNJn1.png" alt></p>
-<p>图片素材和所有代码见文章末尾打包。</p>
-</li>
-</ol>
-<hr>
-<h4 id="二、线程内部类实现动画"><a href="#二、线程内部类实现动画" class="headerlink" title="二、线程内部类实现动画"></a>二、线程内部类实现动画</h4><ol>
-<li><p>在（代码中）初始化窗口</p>
-<p> new PaintThread().start(); //启动重画窗口的线程</p>
-</li>
-<li><p>创建一个内部类代码如下：</p>
-</li>
-</ol>
-<p>//帮助我们反复的重画窗口</p>
-<pre><code>    class PaintThread extends Thread{
-        @Override
-        public void run() {
-            while(true) {
-            System.out.println(&quot;重画了一次&quot;);//测试使用最后删掉
-                repaint();
-
-                try {
-                    Thread.sleep(40); //1s=1000ms
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-</code></pre><ol start="3">
-<li><p>会出现窗口的闪烁问题加入双缓冲解决</p>
-<pre><code>private Image offScreenImage = null;
-
-public void update(Graphics g) {
- if(offScreenImage == null)
-     offScreenImage = this.createImage(Constant.GAME_WIDTH,Constant.GAME_HEIGHT);//这是游戏窗口的宽度和高度
-
- Graphics gOff = offScreenImage.getGraphics();
- paint(gOff);
- g.drawImage(offScreenImage, 0, 0, null);
- }
-</code></pre><ol start="4">
-<li>可以将画飞机的位置定义成变量，令坐标++就会产生飞机移动的动画</li>
-</ol>
-</li>
-</ol>
-<hr>
-<h4 id="三、为游戏建一个父类"><a href="#三、为游戏建一个父类" class="headerlink" title="三、为游戏建一个父类"></a>三、为游戏建一个父类</h4><ol>
-<li><p>类似初始化窗口 2 步骤（下面类相同方法）</p>
-<p>代码如下：</p>
-</li>
-</ol>
-<pre><code> import java.awt.Graphics;
- import java.awt.Image;    
- import java.awt.Rectangle;
- public class GameObject {
- Image img;
- double x,y;
- int speed;
- int width,height;
-
- public void drawSelf(Graphics g){
-     g.drawImage(img, (int)x, (int)y, null);
- }
-
- public GameObject(Image img, double x, double y, int speed, int width, int height) {
-    super();
-    this.img = img;
-    this.x = x;
-    this.y = y;
-    this.speed = speed;
-    this.width = width;
-    this.height = height;
- }
-
- public GameObject(Image img, double x, double y) {
-    super();
-    this.img = img;
-    this.x = x;
-     this.y = y;
- }
-
- public GameObject() {
-
- }
- /**
-  * 返回物体所在的矩形，便于后续的碰撞检测
-  * @return
-  */
- public Rectangle getRect() {
-    return new Rectangle((int)x,(int)y,width,height);
-    }   
- }
+<pre><code>     初学到的对api的使用，总结一下，加深记忆，我认为主要可从功能作用、继承体系、构造器、方法、四个方面来了解。
 </code></pre><hr>
-<h4 id="四、飞机类"><a href="#四、飞机类" class="headerlink" title="四、飞机类"></a>四、飞机类</h4><ul>
-<li><p>在其中封装飞机的一些方法：画自己、飞机位置方法、键盘监听、游戏存活时间.</p>
+<p>一、功能作用</p>
+<p>看这里直接上图</p>
+<p><img src="https://s2.ax1x.com/2019/08/19/m3nRBR.png" alt></p>
+<hr>
+<p>二、继承体系<br><img src="https://s2.ax1x.com/2019/08/19/m3nunA.png" alt></p>
+<hr>
+<p>三、构造器</p>
+<p>分为两种情况 显示有构造器和没有构造器</p>
+<ul>
+<li><p>有构造器<br><img src="https://s2.ax1x.com/2019/08/19/m3G1Nd.png" alt></p>
+<p>调用方式：new FileInputStream(“abc.txt”)；</p>
+</li>
+<li><p>没有构造器：</p>
+</li>
+</ul>
 <ol>
-<li>重写一个drawself,画飞机的移动，飞机位置的方法，同时在planegame里调用<br>Plane plane= new Plane(planeImg,250,250);</li>
-</ol>
+<li><p>工具类<br>如Math类。<br><img src="https://s2.ax1x.com/2019/08/19/m3lVL4.md.png" alt></p>
+<p>调用方式 Math.abs();</p>
 </li>
-</ul>
-<p>代码如下：</p>
-<pre><code> package game;
-
- import java.awt.Graphics;
-
- import java.awt.Image;
-
- public class Plane  extends GameObject {
-
- public  void  drawSelf(Graphics  g){
-    g.drawImage(img, (int)x,(int) y, null);
-    x++;
-  }
-
-    public  Plane(Image  img, double x, double y){
-    this.img = img;
-    this.x = x;
-    this.y = y;
- }
-
- }
-</code></pre><ol start="2">
-<li><p>在主窗口里写入键盘控制代码</p>
-<ul>
-<li><p>如下</p>
-<p>  /<em>键盘控制</em>/</p>
-<pre><code>class KeyMonitor extends KeyAdapter{
-
-@Override
-public void keyPressed(KeyEvent e) {
-   plane.addDirection(e);
-}
-
-@Override
-public void keyReleased(KeyEvent e) {
-   plane.minusDirection(e);
-}
-
-}
-</code></pre><ul>
-<li><p>在初始化窗口增加监听</p>
-<p>  addKeyListener(new KeyMonitor()); //给窗口增加键盘的监听</p>
-</li>
-<li><p>在飞机类封装方法，定义变量（上、下、左、右）、增加方向的方法、x++改为根据方向判断，注释掉的存活时间部分会用到。</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>代码如下：</p>
-<pre><code> import java.awt.Graphics;
-
- import java.awt.Image;
-
- import java.awt.event.KeyEvent;
-
- public class Plane extends   GameObject {
-
- int speed=3;
-
- boolean left,up,right,down;
-
- /*boolean live=true;*/
-
- public void drawSelf(Graphics g){
-    /*if(live) { */
-        g.drawImage(img, (int)x, (int)y, null);
-
-     if(left) {
-        x-=speed;
-     }
-     if(right) {
-         x+=speed;
-     }
-     if(up) {
-         y-=speed;
-     }
-     if(down) {
-        y+=speed;
-     }
-
-    /*}else {
-
-    }*/
-
- }
-
- public Plane(Image img,double x,double y) {
-    this.img=img;
-    this.x=x;
-    this.y=y;
-    this.speed=3;
-    this.width=40;
-    this.height=40;
-
- }
-
-
- //按下某个键增加相应的方向
-   public void addDirection(KeyEvent e) { 
-       switch(e.getKeyCode()) {
-       case KeyEvent.VK_LEFT:
-           left=true;
-           break;
-       case KeyEvent.VK_UP:
-           up=true;
-           break;
-       case KeyEvent.VK_RIGHT:
-           right=true;
-           break;
-       case KeyEvent.VK_DOWN:
-           down=true;
-           break;
-       }
-
-   }   
- //抬起某个键释放相应的方向
-       public void minusDirection(KeyEvent e) { 
-           switch(e.getKeyCode()) {
-           case KeyEvent.VK_LEFT:
-               left=false;
-               break;
-           case KeyEvent.VK_UP:
-               up=false;
-               break;
-           case KeyEvent.VK_RIGHT:
-               right=false;
-               break;
-           case KeyEvent.VK_DOWN:
-               down=false;
-               break;
-           }
-
- } }
-</code></pre><hr>
-<h4 id="五、炮弹类"><a href="#五、炮弹类" class="headerlink" title="五、炮弹类"></a>五、炮弹类</h4><ol>
-<li>构造炮弹的方法</li>
-<li>画炮弹（包括碰撞反弹）</li>
-<li>主窗口内操作</li>
-</ol>
-<ul>
-<li>和plane类一样主窗口new对象直接50个（可改）Shell[] shells=new Shell[50];</li>
-<li>初始化窗口初始化</li>
-</ul>
-<pre><code>    for(int i=0;i&lt;shells.length;i++) {
-    shells[i]= new Shell();
-     }
-</code></pre><ul>
-<li>画方法里 画出所有的炮弹（位置画飞机的下面）</li>
-</ul>
-<pre><code>  for(int i=0;i&lt;shells.length;i++) {
-   shells[i].draw(g);
-  }
-</code></pre><ol start="4">
-<li><p>类代码：</p>
-<pre><code>package game;
-
- import java.awt.Color;
-
- import java.awt.Graphics;
-
-  public class Shell extends GameObject {
-</code></pre></li>
-</ol>
-<pre><code>    double degree;
-
-     public Shell() {
-    x=200;
-    y=200;
-    width=10;
-    height=10;
-    speed=2;
-    degree=Math.random()*Math.PI*2;
-    }
-
-    public void draw(Graphics g) {
-    Color c =g.getColor();
-    g.setColor(Color.YELLOW);
-
-    g.fillOval((int)x, (int)y, width, height);//填充
-
-    //炮弹沿着任意角度去飞
-    x+=speed*Math.cos(degree);
-    y+=speed*Math.sin(degree);
-
-    if(x&lt;0||x&gt;Constant.GAME_WIDTH-width) {
-        degree =Math.PI-degree;
-    }
-    if(y&lt;30||y&gt;Constant.GAME_HEIGHT-height) {
-        degree =-degree;
-    }
-    g.setColor(c);
-
-   }
-     }
-</code></pre><ol start="5">
-<li><p>效果：</p>
-<p><img src="https://s2.ax1x.com/2019/07/24/eEMP0O.gif" alt></p>
+<li><p>静态方法<br>如Runtime类<br><img src="https://s2.ax1x.com/2019/08/19/m38WtA.png" alt></p>
+<p>调用方式 Runtime.getRuntime().halt();</p>
 </li>
 </ol>
 <hr>
-<h4 id="六、碰撞检测和爆炸类"><a href="#六、碰撞检测和爆炸类" class="headerlink" title="六、碰撞检测和爆炸类"></a>六、碰撞检测和爆炸类</h4><ul>
-<li>碰撞检测</li>
-</ul>
-<ol>
-<li>主窗口画炮弹的循环里加入</li>
-</ol>
-<pre><code>boolean touch=shells[i].getRect().intersects(plane.getRect());
-                   if(touch) {
-                    plane.live=false;}
-</code></pre><ol start="2">
-<li>将飞机类的注释去掉,如果发生碰撞飞机消失死掉</li>
-</ol>
-<ul>
-<li>爆炸类</li>
-</ul>
-<ol>
-<li>包含爆炸的位置和爆炸的图片加载</li>
-</ol>
-<p>代码如下：</p>
-<pre><code>package game;
-
-import java.awt.Graphics;
-
-import java.awt.Image;
-
-public class Explode {
-double x, y;
-
-static Image[] imgs = new Image[16];
-static {
-    for (int i = 0; i &lt; 16; i++) {
-        imgs[i] = GameUtil.getImage(&quot;image/explode/e&quot; + (i + 1) + &quot;.gif&quot;);
-        imgs[i].getWidth(null);
-    }
-}
-
-int count;
-
-public void draw(Graphics g) {
-    if (count &lt;= 15) {
-        g.drawImage(imgs[count], (int) x, (int) y, null);
-        count++;
-    }
-}
-
-public Explode(double x, double y) {
-    this.x = x;
-    this.y = y;
-}
-  }
-</code></pre><ol start="2">
-<li><p>在主窗口声明 Explode bao;在画炮弹方法如果飞机死亡中加入</p>
-<pre><code> if(bao==null) {
- bao= new Explode(plane.x,plane.y);    
-  }
-</code></pre><ol start="3">
-<li>效果<br><img src="https://s2.ax1x.com/2019/07/24/eEfnxJ.gif" alt></li>
-</ol>
-</li>
-</ol>
+<p>四、方法<br><img src="https://s2.ax1x.com/2019/08/19/m3M540.png" alt></p>
 <hr>
-<h4 id="七、增加游戏计时"><a href="#七、增加游戏计时" class="headerlink" title="七、增加游戏计时"></a>七、增加游戏计时</h4><ol>
-<li><p>主窗口定义时间变量</p>
-<pre><code>Date startTime=new Date();
-Date endTime;
-int period;//游戏持续的时间
-</code></pre><ol start="2">
-<li><p>在爆炸的if语句里加入</p>
-<p> endTime=new Date();<br>period=(int)((endTime.getTime()-startTime.getTime())/1000);</p>
-</li>
-<li><p>在画炮弹里加入</p>
-<p> //计时功能，给出提示</p>
-<pre><code>if(!plane.live) {
- g.setColor(Color.red);
- Font f=new Font(&quot;宋体&quot;,Font.BOLD,50);
- g.setFont(f);
- g.drawString(&quot;时间：&quot;+period+&quot;秒&quot;,(int)plane.x, (int)plane.y);
-  }
-</code></pre></li>
-<li>在主窗口画方法开始 加Color c=g.getColor();结束 加g.setColor(c);<br>变回原来的颜色</li>
-</ol>
-</li>
-</ol>
-<hr>
-<ul>
-<li><a href="https://pan.baidu.com/s/1C7Gnkx58yWqc6gyyGL0QuA
-" target="_blank" rel="noopener">源码素材</a></li>
-</ul>
+<p>END</p>
 
             </div>
             <hr>
@@ -1062,7 +618,7 @@ int period;//游戏持续的时间
             </div>
             <br>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">
-                    《启发性的飞机小游戏（一）》
+                    《如何使用API》
                 </span> 由
             <a xmlns:cc="http://creativecommons.org/ns#" href property="cc:attributionName" rel="cc:attributionURL">
                 zfylearn
@@ -1127,40 +683,41 @@ int period;//游戏持续的时间
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="../../../08/09/java-rong-qi-fan-xing-ji-yi-xie-zhi-shi-dian-de-hui-gu/">
+                <a href>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="java容器、泛型及一些知识点的回顾">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="如何使用API">
                         
-                        <span class="card-title">java容器、泛型及一些知识点的回顾</span>
+                        <span class="card-title">如何使用API</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
+     初学到的对api的使用，总结一下，加深记忆，我认为主要可从功能作用、继承体系、构造器、方法、四个方面来了解。
 
-记录一些自己在学习中认识不够清晰的知识点，方便自己回顾
-
-
-一、 集合的知识结构图
-
-什么时候使用集合？
- 当我们需要将一些相同结构的个体整合在一起时，就可以考虑使用集合了 。举例：购物车
+一、功能作用
+看这里直接上图
 
 
+二、继承体系
 
-为什么要使用集合？
-  集合和数组相似点
+三、构造器
+分为两种情况 显示有构造器和没有构造器
+
+有构造器
+调
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-09
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-19
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -1169,11 +726,12 @@ int period;//游戏持续的时间
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="../../../../tags/学习笔记/" target="_blank">
-                        <span class="chip bg-color">学习笔记</span>
+                    <a href="../../../../tags/java/" target="_blank">
+                        <span class="chip bg-color">java</span>
                     </a>
                     
                 </div>
@@ -1187,30 +745,33 @@ int period;//游戏持续的时间
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../../08/yilia-zhu-ti-pei-zhi-zhong-yu-dao-de-yi-xie-wen-ti/">
+                <a href="../java-eclipse-kuai-jie-jian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="yilia主题配置中遇到的一些问题 ">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="java- Eclipse快捷键">
                         
-                        <span class="card-title">yilia主题配置中遇到的一些问题 </span>
+                        <span class="card-title">java- Eclipse快捷键</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-一、头像设置中的问题问题  
+                            快捷键
 
-解决方法  二、推送到远端时的问题
-问题如下   解决方法打开方式   
-打开位置   三、点击所有文章的缺失问题解决方法   1、node版本大于6.2
-   2、博客根目录下（和上面打开位置相同）执行命
+CTRL+a+c 全选复制
+CTRL+v 粘贴
+CTRL+x 剪贴
+Ctrl+z 撤销
+Ctrl+Shift+O 自动引入类包
+Alt+Shift+R  相同字符整体重命名
+Ctrl+/ 单行注释
+Ctrl+Shift+/ 多行注
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-08
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-19
                             </span>
                         <span class="publish-author">
                             
@@ -1223,8 +784,8 @@ int period;//游戏持续的时间
                 
                 <div class="card-action article-tags">
                     
-                    <a href="../../../../tags/yilia主题配置中遇到的一些问题/" target="_blank">
-                        <span class="chip bg-color">yilia主题配置中遇到的一些问题 </span>
+                    <a href="../../../../tags/Eclipse/" target="_blank">
+                        <span class="chip bg-color">Eclipse</span>
                     </a>
                     
                 </div>

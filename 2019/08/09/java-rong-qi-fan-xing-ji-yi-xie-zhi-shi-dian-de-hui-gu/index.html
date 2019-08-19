@@ -41,7 +41,8 @@
     </style>
 
     <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -491,7 +492,7 @@ TreeMap：排序时使用
 <li><ol start="2">
 <li>可以把运行时的问题提前到编译时期。</li>
 </ol>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo01Generic</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo01Generic</span> <span class="token punctuation">{</span>
 
      <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
@@ -522,7 +523,7 @@ TreeMap：排序时使用
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <hr>
@@ -536,7 +537,7 @@ TreeMap：排序时使用
 <li>如果我们没有定义构造器，则系统会自动定义一个无参的构造方法。如果已定义则编译器不会 添加无参数构造方法！</li>
 <li>与普通方法一样，构造方法也可以重载</li>
 </ul>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Point</span><span class="token punctuation">{</span>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Point</span><span class="token punctuation">{</span>
     <span class="token keyword">double</span> x<span class="token punctuation">,</span>y<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">//构造方法名称必须和类名保持一致</span>
@@ -561,7 +562,7 @@ TreeMap：排序时使用
     <span class="token punctuation">}</span>
 
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p>四、Static关键字</p>
 <ul>
@@ -574,7 +575,7 @@ TreeMap：排序时使用
 <li><p>非静态方法可以使用静态</p>
 </li>
 </ul>
-<pre class=" language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestStatic</span>
+<pre class="line-numbers language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestStatic</span>
   <span class="token punctuation">{</span> 
   <span class="token keyword">int</span> a<span class="token punctuation">;</span> 
 
@@ -606,7 +607,7 @@ TreeMap：排序时使用
            hi<span class="token punctuation">.</span><span class="token function">tt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//用对象引用，因为从属于对象</span>
       <span class="token punctuation">}</span> 
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p>五、this关键字</p>
 <ul>
@@ -623,7 +624,7 @@ TreeMap：排序时使用
 <pre><code>• 使用this来调用其它构造方法 
 • 位置：必须是第一条语句
 • this不能用于static方法。（底层在堆里的对象中，而静态方法在方法区）
-</code></pre><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TeatThis</span> <span class="token punctuation">{</span>
+</code></pre><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TeatThis</span> <span class="token punctuation">{</span>
 
     <span class="token keyword">int</span> a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>c<span class="token punctuation">;</span>
 
@@ -654,7 +655,7 @@ TreeMap：排序时使用
     <span class="token punctuation">}</span>
 
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>再次强调</p>
 <pre><code>• This代表当前对象自身的引用（必须new） 
 • This可以修饰属性，区别成员变量和局部变量 
@@ -899,41 +900,37 @@ TreeMap：排序时使用
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href>
+                <a href="../../19/zhen-jian-dan-de-io-liu-hui-gu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="java容器、泛型及一些知识点的回顾">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="简单的Io流回顾">
                         
-                        <span class="card-title">java容器、泛型及一些知识点的回顾</span>
+                        <span class="card-title">简单的Io流回顾</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            一、大体结构
+IO流：见名知意就是 输入、输出流
+一、 从处理数据来看
 
-记录一些自己在学习中认识不够清晰的知识点，方便自己回顾
+处理数据的话为字节流，加一个认知吧
 
+字节流：Stream结束的都是字节流
 
-一、 集合的知识结构图
+因为我们经常用的中文，英文各种语言就有了字符流
 
-什么时候使用集合？
- 当我们需要将一些相同结构的个体整合在一起时，就可以考虑使用集合了 。举例：购物车
-
-
-
-为什么要使用集合？
-  集合和数组相似点
+字符流：是Reader和Witer的子
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-09
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-19
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -942,12 +939,11 @@ TreeMap：排序时使用
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="../../../../tags/学习笔记/" target="_blank">
-                        <span class="chip bg-color">学习笔记</span>
+                    <a href="../../../../tags/java笔记/" target="_blank">
+                        <span class="chip bg-color">java笔记</span>
                     </a>
                     
                 </div>
@@ -1154,7 +1150,7 @@ TreeMap：排序时使用
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">3.6k</span>
+                <span class="white-color">4.4k</span>
             
 
             
